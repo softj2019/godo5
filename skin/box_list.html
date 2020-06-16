@@ -1,0 +1,161 @@
+{*** 상품 리스트 | goods/goods_list.php ***}
+{ # header }
+<div class="contents">
+    <div class="view">
+        <div class="location">
+            <h3 class="dn">현재 위치</h3>
+            <span>홈</span>
+            <!--{ ? goodsCategoryList }-->
+            <!--{ @ goodsCategoryList }-->
+            <div class="navi">
+                <span class="last">{=.cateNm}</span>
+            </div>
+
+            <!--{ / }-->
+            <!--{ / }-->
+        </div>
+
+
+        <div class="cg-main">
+            <!--<h2>{=goodsCategoryList[cateCd]['cateNm']}</h2>-->
+            <!--{ ? naviDisplay.naviUse =='y' }-->
+            <!--{ ? themeInfo.cateHtml1 }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1))}</div><!--{ / }-->
+            { / }
+            <img src="/data/img/box_title.png" alt="박스타이틀" style="margin-top:30px;">
+            <!--<p style="text-align:center;"><img src="/data/img/box_list_info_002.png"></p>-->
+            <ul class="lower-category lower-category2">
+                <li><a href="/goods/box_list.php?cateCd=011" title="전체박스페이지"><img src="/data/img/bsub01.png" alt="전체박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011001" title="소형박스페이지"><img src="/data/img/bsub02.png" alt="소형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011002" title="중형박스페이지"><img src="/data/img/bsub03.png" alt="중형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011003" title="대형박스페이지"><img src="/data/img/bsub04.png" alt="대형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011004" title="우체국박스페이지"><img src="/data/img/bsub05.png" alt="우체국박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011012" title="이사짐박스페이지"><img src="/data/img/bsub06.png" alt="이사짐박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011013" title="의류배송용박스페이지"><img src="/data/img/bsub07.png" alt="의류배송용박스"></a></li>
+            </ul>
+            <ul class="lower-category lower-category2" style="margin-bottom:0;">
+                <li><a href="/goods/box_list.php?cateCd=011005" title="B형박스"><img src="/data/img/box_type_b.png" alt="B형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011006" title="C형박스"><img src="/data/img/box_type_c.png" alt="C형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011007" title="D형박스"><img src="/data/img/box_type_d.png" alt="D형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011008" title="G형박스"><img src="/data/img/box_type_g.png" alt="G형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011009" title="P타입박스"><img src="/data/img/box_type_p.png" alt="P형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011010" title="높이가변형박스"><img src="/data/img/box_type_hv.png" alt="높이가변형박스"></a></li>
+                <li><a href="/goods/box_list.php?cateCd=011011" title="플라스틱박스"><img src="/data/img/box_type_da.png" alt="플라스틱박스"></a></li>
+            </ul>
+            <!--<h2 style="margin-top:10px; font-size:2em; text-align:center; color:#000000; background-color:#fef1bc;">{=goodsCategoryList[cateCd]['cateNm']}</h2>-->
+            <p><img src="/data/img/box_list_info_001.jpg"></p>
+
+            <!-- 설문조사 배너 -->{=pollViewBanner()}<!-- 설문조사 배너 -->
+
+            <!--{ ? themeInfo.recomDisplayFl == 'y'  && widgetGoodsList}-->
+            <!--{ ? themeInfo.cateHtml2 }--><div class="user-tune">{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml2))}</div><!--{ / }-->
+            <h3>추천상품</h3>
+            <div class="weekly-best">
+                <!-- 추천상품 -->
+                {=includeWidget('goods/_goods_display.html')}
+                <!-- 추천상품 -->
+            </div>
+            <!--{ / }-->
+            <div class="goods-list">
+                <!--{ ? themeInfo.cateHtml3 }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml3))}</div><!--{ / }-->
+                <form name="frmList" action="/goods/box_list.php">
+                    <input type="hidden" name="{cateType}Cd" value="{cateCd}"/>
+                    <input type="hidden" name="search_type" value="sub">  <!-- 검색 메인인지 서브인지 -->
+                    <input type="hidden" name="sort" value="">  <!-- 정렬대상 -->
+                    <input type="hidden" name="order" value="">  <!-- 정렬순 -->
+                    <fieldset>
+                        <legend>상품 정렬 폼</legend>
+                        <div class="align">
+                            <ul>
+                                <li style="padding-left:16px;">
+                                    <label for="sort1" style="color:#21499f;">정렬</label>
+                                </li>
+                                <!--<li><img src="/data/img/icon_bar.png"></li>
+                                <li>
+                                    <input type="radio" id="sort2" class="radio" name="sort" value="">
+                                    <label for="sort2">제품번호순</label>
+                                    <div class="sort-area">
+                                        <a href="#" title="오름차순" class="sort-btn" data-sort="goodsNo" data-order="0">∧</a>
+                                        <a href="#" title="내림차순" class="sort-btn" data-sort="goodsNo" data-order="1">∨</a>
+                                    </div>
+                                </li>-->
+                                <li><img src="/data/img/icon_bar.png"></li>
+                                <li>
+                                    <input type="radio" id="sort3" class="radio" name="sort" value="">
+                                    <label for="sort3">가로크기순</label>
+                                    <div class="sort-area">
+                                        <a href="#" title="오름차순" class="sort-btn" data-sort="goodsWidth" data-order="0">∧</a>
+                                        <a href="#" title="내림차순" class="sort-btn" data-sort="goodsWidth" data-order="1">∨</a>
+                                    </div>
+                                </li>
+                                <li><img src="/data/img/icon_bar.png"></li>
+                                <li>
+                                    <input type="radio" id="sort4" class="radio" name="sort" value="">
+                                    <label for="sort4">세로크기순</label>
+                                    <div class="sort-area">
+                                        <a href="#" title="오름차순" class="sort-btn" data-sort="goodsDepth" data-order="0">∧</a>
+                                        <a href="#" title="내림차순" class="sort-btn" data-sort="goodsDepth" data-order="1">∨</a>
+                                    </div>
+                                </li>
+                                <li><img src="/data/img/icon_bar.png"></li>
+                                <li>
+                                    <input type="radio" id="sort5" class="radio" name="sort" value="">
+                                    <label for="sort5">높이순</label>
+                                    <div class="sort-area">
+                                        <a href="#" title="오름차순" class="sort-btn" data-sort="goodsHeight" data-order="0">∧</a>
+                                        <a href="#" title="내림차순" class="sort-btn" data-sort="goodsHeight" data-order="1">∨</a>
+                                    </div>
+                                </li>
+                                <li><img src="/data/img/icon_bar.png"></li>
+                                <li>
+
+                                    <label style="position:absolute; left:0;">사이즈검색 : </label>
+                                    <div class="sch">
+                                        <ul>
+                                            <li><input type="text" id="" name="s_goodsWidth" placeholder="가로mm" class="sch-box" style="left:-3px;"></li>
+                                            <li><input type="text" id="" name="s_goodsDepth" placeholder="세로mm" class="sch-box" style="left:46px;"></li>
+                                            <li><input type="text" id="" name="s_goodsHeight" placeholder="높이mm" class="sch-box" style="right:-144px;"></li>
+                                        </ul>
+                                    </div>
+                                    <select name="s_limit">
+                                        <option>±오차범위</option>
+                                        <option value="10">±10</option>
+                                        <option value="20">±20</option>
+                                        <option value="30">±30</option>
+                                        <option value="40">±40</option>
+                                        <option value="50">±50</option>
+                                        <option value="60">±60</option>
+                                    </select>&nbsp;&nbsp;
+                                    <input type="image" class="image" id="btnSearchTop" title="검색" value="검색" src="/data/img/sch_btn_gray.png" alt="검색" style="margin-top:-5px;"/>
+                                </li>
+                                <li><img src="/data/img/icon_bar.png"></li>
+                                <li>
+
+                                    <label style="position:absolute; left:0;">제품번호 : </label>
+                                    <div style="float:left;">
+                                        <ul>
+                                            <li><input type="text" id="" name="inpGoodsNo" placeholder="제품번호 검색" style="width:85px; height:22px; margin-top:-10px;"></li>
+                                        </ul>
+                                    </div>
+                                    <input type="image" class="image" id="btnSearchTop" title="검색" value="검색" src="/data/img/sch_btn_gray.png" alt="검색" style="margin-top:-5px;"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                </form>
+
+                { # goodsTemplate }
+
+            </div>
+            <!--<center style="margin-top:50px;">
+            <img src="/data/img/box_list_info_002.jpg">
+            </center>-->
+            <!-- <div class="board-paging">
+                {page->getPage()}
+            </div> -->
+        </div>
+    </div>
+    <hr>
+</div>
+
+
+{ # footer }
